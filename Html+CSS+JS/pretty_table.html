@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pretty Slide</title>
+    <link rel="stylesheet" href="pretty_table.css">
+</head>
+<body>
+<div id="app">
+  <lazy_table v-bind:table_data="slide_data" :rows="config"></lazy_table>
+</div>
+<template id="template_lazy_table">
+  <div class="divv">
+    <h1>从Firebase获得的KEY</h1>
+    <pre>{{keys}}</pre>
+    <h1>搜索+分页展示(Instant Search + Paging)</h1>
+    <div class="input-group">搜索 </div>
+    <input v-model="search_key"/>
+    <table class="table">
+      <thead>
+        <th v-for="key in keys">{{change_name(key)}}</th>
+      </thead>
+      <tbody>
+        <tr v-for="row in sliced_table_data">
+          <td v-for="key in keys"><span>{{row[key]}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-default" v-for="p in (page_count+1)" @click="page_index=p-1">{{p}}</button>
+    <h1>从Firebase获得的DATA</h1>
+    <pre>{{table_data}}</pre>
+  </div>
+</template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+<script src="pretty_table.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</html>
